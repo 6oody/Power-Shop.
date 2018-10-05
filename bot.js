@@ -27,16 +27,6 @@ client.user.setGame(`Power-Shop.`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
 });
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const prefix = ">";
-
-client.on('ready', () => {
-     client.user.setActivity(" >help | >inv",{type: 'WATCHING'})
-
-});
-
-
 client.on("message", message => {
     var prefix = "^";
  if (message.content === "^help") {
