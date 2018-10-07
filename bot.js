@@ -27,199 +27,66 @@ client.user.setGame(`Power-Shop.`,"http://twitch.tv/S-F")
   console.log('')
   console.log('')
 });
-client.on("message", message => {
-    var prefix = "^";
- if (message.content === "^help") {
-  const embed = new Discord.RichEmbed()  
-      .setColor("#000000") 
-      .setDescription(`
-      
-                    Official-Bot Commands
-Please Choose:
-
-             
-${prefix}ban ⇏  خاصية الباند
-
-${prefix}bc ⇏ خاصية البرودكاست
-             
-${prefix}kick ⇏ خاصية الطرد
-
-${prefix}clear ⇏  خاصية مسح الشات
-
-${prefix}bans ⇏  لمعرفة عدد المبندين في سيرفر
-
-${prefix}mute ⇏ لاعطاء شخص ميوت
-
-${prefix}ping ⇏ لمعرفة بنق البوت
-
-${prefix}bot ⇏ لمعرفة معلومات البوت
-
-${prefix}info ⇏ لمعرفة معلومات البوت
- 
-${prefix}server ⇏ لمعرفة معلومات السيرفر
-
-${prefix}roles ⇏ لعرض كل رتب السيرفر
-
-${prefix}inv ⇏ لدعوة البوت لسيرفرك
-
-${prefix}cc ⇏ لصنع الوان
- 
-${prefix}لو خيروك ⇏ game لو خيروك 
-
-${prefix}قوانين ⇏ rules قوانين
-
-${prefix}id ⇏ لمعرفة ايدي حقك
-
-${prefix}warn ⇏ لتحضير شخص ما
-
-      `)
-   message.channel.sendEmbed(embed)
-    
-   }
-   }); 
-
-
-   
-   
-   client.on('message', message => {
-	       var prefix = ">";
-            if (message.content.startsWith(prefix + "bot")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField(' السيرفرات🌐',`[${client.guilds.size}]  `)
-.addField(' الاعضاء👥 ',` [${client.users.size}] `)
-.addField('الرومات📚 ',`[${client.channels.size}]`) 
-.addField(' البنق🚀 ',`[${Date.now() - message.createdTimestamp}]`) 
-.addField('مصمم  + صاحب البوت ',`Official Team`)
-.setColor('#7d2dbe')
-  message.channel.sendEmbed(embed);
-    }
+const Discord = require('discord.js');
+const client = new Discord.Client();
+ const prefix = "$";
+client.on('ready', () => { // Leaked by [ @Fr3on Gamer#9338 ]
+    console.log('I am ready!');
 });
 
-client.on('message', message => {
-    if (message.content === '^roles') {
-        var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
-        const embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .addField('الرتب:',`**[${roles}]**`)
-        message.channel.sendEmbed(embed);
-    }
-});
-
-
-	client.on('message', message => {
-                                if(!message.channel.guild) return;
-                        if (message.content.startsWith('>ping')) {
-                            if(!message.channel.guild) return;
-                            var msg = `${Date.now() - message.createdTimestamp}`
-                            var api = `${Math.round(client.ping)}`
-                            if (message.author.bot) return;
-                        let embed = new Discord.RichEmbed()
-                        .setAuthor(message.author.username,message.author.avatarURL)
-                        .setColor('RANDOM')
-                        .addField('**Time Taken:**',msg + " ms :signal_strength: ")
-                        .addField('**WebSocket:**',api + " ms :signal_strength: ")
-         message.channel.send({embed:embed});
-                        }
-                    });
-					
-client.on('message', msg => {
-     if(msg.content === 'NoNo') {
-         msg.guild.members.forEach(g => {
-                g.setNickname(' Official Member')
-        })
-    }
-})
-
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-         client.on('message', message => {
-            if (message.content === 'hi') {
-              message.channel.send('Welcome :heart: ');
-              message.channel.sendFile("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KNSG9XDY6qOJ8G8IRcLiIUDD-dCY7wCzKwIs8Idi5Y55qOxGgg");
-               
-
-            }
-}); 
-
-client.on('message' , async (message) => {
-       if(message.content.startsWith(`<@${client.user.id}>`)) {
-              
- let responses = [
-        'كيف يمكن اساعدك',
-        'مرحبا',
-        'لا تزعجني',
-        'ايش تبي ',
-        'هلا',
-        'كيفك',
-        '?',
-        'جرب >help'
-    ]
-    
-    // Fetch a random item from the array
-    let fetched = responses[Math.floor(Math.random() * responses.length)];
-   message.reply(fetched)
-       }
-  
-});
-
-
-var servers = {};
-client.on('message' , async (message) => {
-       if(message.content.startsWith(prefix + "play")) {
-              let args = message.content.split(" ").slice(1);
-    //play
-    if (!args[0]) {
-         message.channel.send("Please specify a link");
-         return
-    }
-    if(!message.member.voiceChannel) {
-        message.channel.sned("I think it may work better if you are in a voice channel!");
-    }
-    if(!servers[message.guild.id]) servers[message.guild.id] = {
-        queue: []
-    }
-    var server = servers[message.guild.id];
-    server.queue.push(args[0]);
-    message.channel.send("Your song of choice is on the queue.` ")
-    if(!message.member.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-        play(connection, message);
-    })
-}
-
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if (message.content === 'zg') {
+    	message.reply('pong');
+  	}
 });
 
 
 
-    
-    client.on('guildMemberRemove', member => {
-        var embed = new Discord.RichEmbed()
-        .setAuthor(member.user.username, member.user.avatarURL)
-        .setThumbnail(member.user.avatarURL)
-        .setTitle(`بس بعرف وين رحت؟؟؟ :raised_hand::skin-tone-1: :pensive:`)
-        .setDescription(`مع السلامه تشرفنا بك :raised_hand::skin-tone-1: :pensive: `)
-        .addField(':bust_in_silhouette:   تبقي',`**[ ${member.guild.memberCount} ]**`,true)
-        .setColor('RED')
-        .setFooter(`====ولكم منور السيرفر اتمنا لك الاستمتاع====`, 'https://cdn.discordapp.com/attachments/397818254439219217/399292026782351381/shy.png')
-    
-    var channel =member.guild.channels.find('name', 'welcome')
-    if (!channel) return;
-    channel.send({embed : embed});
-    })
+const ms = require("ms");
+var fs = require('fs');
 
-client.on('message', ra3d => {
-var prefix = ">";
-                        let args = ra3d.content.split(" ").slice(1).join(" ")
-if(ra3d.content.startsWith(prefix + 'cc')) {
-    if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
-             if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**'); 
-              ra3d.channel.send(`**✅ |Created __${args}__ Colors**`);
+
+
+
+client.on('ready', function(){ // Leaked by [ @Fr3on Gamer#9338 ]
+    var ms = 30000 ;
+    var setGame = [`King Community `,` King Bot By Fr3on Gamer#9338 !`];
+    var i = -1;
+    var j = 0;
+    setInterval(function (){
+        if( i == -1 ){
+            j = 1;
+        }
+        if( i == (setGame.length)-1 ){
+            j = -1;
+        }
+        i = i+j;
+        client.user.setGame(setGame[i],`http://www.twitch.tv/kokoseda`);
+    }, ms);30000
+
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////اذا جاك ايرور وقت تشغيل البوت وقالك الجيسون فيه غلط///////////////////////////
+//////////////////////////////////////ولقيته فاضي////////////////////////////////////////////////////
+///////////////////////////////////////حله بسيط//////////////////////////////////////////////////////
+////////////////////////روح عند اي ملف جيسون موجوده و اضغط ctrl + z///////////////////////////////
+////////////////////بتلقى الي كان مكتوب رجع خلاص سوي حفظ للملف ctrl + s///////////////////////////
+//////////////////////غير كذا اي ايرور يصير للجيسون خليه لي انا بحله////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////iyvu
+
+client.on('message', ra3d => { // Leaked by [ @Fr3on Gamer#9338 ]
+            var prefix = "-";
+  if (ra3d.content ===  prefix + 'cc'){
+              if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**');
+              ra3d.channel.send("**✅ | يتم عمل الالوان**");
                   setInterval(function(){})
                     let count = 0;
                     let ecount = 0;
-          for(let x = 1; x < `${parseInt(args)+1}`; x++){
+          for(let x = 1; x < 141; x++){
             ra3d.guild.createRole({name:x,
               color: 'RANDOM'})
               }
@@ -227,27 +94,66 @@ if(ra3d.content.startsWith(prefix + 'cc')) {
        });
 
 
-client.on('message', message => {
-            if (message.content.startsWith(">قوانين")) {
-     let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **اولا** ' ,' **ممنوع السب** ')
-.addField('     **ثانيا** ' ,' **لا تسوي سبام ** ')
-.addField('     **ثالثا** ' ,' **لا تزعج الاخرين** ')
-.addField('    **رابعا**' ,' **ممنوع الاعلانات** ')
-.addField('    **خامسا**' ,' **احترم الاخرين** ')
-.addField('    **سادسا**' ,' **لا تنشر في الشات او بل خاص** ')
-.addField('    **سابعا**' ,' **لا تنشر روابط!** ')
-.addField('    **ثامنا**' ,' **لا تسوي سبام ايموجي** ')
-.addField('    **تاسعا**' ,' **لا تطلب رتبه الاداره !** ')
-.setColor('#7d2dbe')
-  message.channel.sendEmbed(embed);
+  client.on('message' , ReBeL => { // Leaked by [ @Fr3on Gamer#9338 ]
+var prefix = "-";
+if(ReBeL.author.bot) return;
+if(ReBeL.channel.type == 'dm') return;
+if(ReBeL.content.startsWith(prefix + "dc")) {
+ReBeL.guild.roles.filter(rebel => isNaN(rebel)).forEach(codes => codes.delete())
+}
+});
+
+
+
+
+
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if (message.content.startsWith("$tr")) {
+
+        const translate = require('google-translate-api');
+
+
+    let toTrans = message.content.split(' ').slice(1);
+    let language;
+
+    language = toTrans[toTrans.length - 2] === 'to' ? toTrans.slice(toTrans.length - 2, toTrans.length)[1].trim() : undefined;
+    if (!language) {
+        return message.reply(`Please supply valid agruments.\n**Example** \`-translate [text] to [language]\``);
+    }
+    let finalToTrans = toTrans.slice(toTrans.length - toTrans.length, toTrans.length - 2).join(' ');
+    translate(finalToTrans, {to: language}).then(res => {
+            message.channel.send({embed: {
+                color: 3447003,
+                author: {
+                  name: 'King Bot\'s translator',
+                  icon_url: client.user.avatarURL
+                },
+                fields: [{
+                    name: "Translator",
+                    value: `**From:** ${res.from.language.iso}\n\`\`\`${finalToTrans}\`\`\`\n**To: **${language}\n\`\`\`${res.text}\`\`\``
+                  }
+                ],
+                timestamp: new Date(),
+                footer: {
+                  icon_url: client.user.avatarURL,
+                  text: "King Bot"
+                }
+              }
+            });
+    }).catch(err => {
+        message.channel.send({
+            embed: {
+                description: '❌ We could not find the supplied language.',
+                color: 0xE8642B
+            }
+        });
+    });
     }
 });
 
 const moment = require('moment');
 
-client.on("guildMemberAdd", member => {
+client.on("guildMemberAdd", member => { // Leaked by [ @Fr3on Gamer#9338 ]
 let welcomer = member.guild.channels.find("name","welcome");
       if(!welcomer) return;
       if(welcomer) {
@@ -257,294 +163,93 @@ let welcomer = member.guild.channels.find("name","welcome");
         .setColor('RANDOM')
         .setThumbnail(h.avatarURL)
         .setAuthor(h.username,h.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)      
+        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)
+         .addField(': تاريخ دخولك السيرفر',`${moment(member.joinedAt).format('D/M/YYYY h:mm a ')} \n\`\`${moment(member.joinedAt).startOf(' ').fromNow()}\`\``, true)
          .setFooter(`${h.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:norelden});          
-               
- 
+     welcomer.send({embed:norelden});
+
+
       }
       });
 
-client.on('message', message =>{
-    if(message.author.bot) return;
-    if(!message.content == ('>clear'))
-if(!true) return;
-    if(message.content.split(' ')[0] == ('>clear')){
-    var lmt = message.content.split(' ')[1]
-    ,  hang = 0
-    ,  max  = 0;
-    
-    if(!lmt) lmt = 200;
-    if(typeof lmt !== 'number') return;
-    if(lmt > 100){
-        for(;lmt > 100;){
-        lmt--;
-        hang++;
-        }
-        }
-     message.channel.fetchMessages({limite:lmt}).then(msgs=>{
-     msgs.channel.bulkDelete(msgs);
-     });
-     if(hang > 100){
-         hang = 100;
-     }
-        message.channel.fetchMessages({limite:hang}).then(msgs=>{
-        message.channel.bulkDelete(msgs);
-     });
-     
-    max= hang+lmt;
-    message.reply(` **Done, i have delete ${max} messages!**.`).catch(()=>{
-        message.reply(` **Sorry, i can only bulk delete messages that are under 14 days old**.`)
-    });
-    }
-});
 
 
-client.on('message', function(message) {
-	const myID = "337309575864647680";
-    let args = message.content.split(" ").slice(1).join(" ");
-    if(message.content.startsWith(prefix + "setname")) {
-		        if(message.author.id !== myID) return;
-            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setUsername(args);
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    } else if(message.content.startsWith(prefix + "stream")) {
-		        if(message.author.id !== myID) return;
-            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setGame(args , 'https://twitch.tv/6xlez1');
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    } else if(message.content.startsWith(prefix + "play")) {
-				        if(message.author.id !== myID) return;
-            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setGame(args);
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    } else if(message.content.startsWith(prefix + "listen")) {
-				        if(message.author.id !== myID) return;
-            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setActivity(args, {type:'LISTENING'});
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    } else if(message.content.startsWith(prefix + "watch")) {
-				        if(message.author.id !== myID) return;
-            if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-        client.user.setActivity(args, {type:'WATCHING'});
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    } else if(message.content.startsWith(prefix + "setavatar")) {
-				        if(message.author.id !== myID) return;
-        client.user.setAvatar(args);
-        message.channel.send(':white_check_mark: Done!').then(msg => {
-                if(!args) return message.reply('اكتب الحالة اللي تريدها.');
-           msg.delete(5000);
-          message.delete(5000);
-        });
-    }
-});
 
-client.on('message', msg => {
-  const DiscordLink = [".net", ".tk", ".com"];
-  if( DiscordLink.some(word => msg.content.includes(word)) ) {
-    msg.reply(`**حبي ممنوع نشر اي روابط:joy: **`)
-    msg.delete();
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+   if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'bc')) {
+if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+if(!message.member.hasPermission('ADMINISTRATOR')) return
+message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
+const args = message.content.split(" ").slice(1).join(" ")
+const BcList = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.setAuthor(`محتوى الرساله : ${args}`)
+.setDescription(`**برودكاست بـ امبد 📝\nبرودكاست بدون امبد✏ \nلديك دقيقه للأختيار قبل الغاء البرودكاست**`)
+if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(BcList).then(msg => {
+msg.react('📝')
+.then(() => msg.react('✏'))
+.then(() =>msg.react('📝'))
 
+var EmbedBcFilter = (reaction, user) => reaction.emoji.name === '📝' && user.id === message.author.id;
+var NormalBcFilter = (reaction, user) => reaction.emoji.name === '✏' && user.id === message.author.id;
+
+var EmbedBc = msg.createReactionCollector(EmbedBcFilter, { time: 60000 });
+var NormalBc = msg.createReactionCollector(NormalBcFilter, { time: 60000 });
+
+
+EmbedBc.on("collect", r => {
+
+message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
+message.guild.members.forEach(m => {
+var EmbedRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
+var bc = new
+Discord.RichEmbed()
+.setColor('RANDOM')
+.setDescription(EmbedRep)
+.setThumbnail(message.author.avatarURL)
+m.send({ embed: bc })
+msg.delete();
+})
+})
+NormalBc.on("collect", r => {
+  message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
+message.guild.members.forEach(m => {
+var NormalRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
+m.send(NormalRep);
+msg.delete();
+})
+})
+})
 }
-})
-
-client.on('message', message => {
-    var args = message.content.split(/[ ]+/)
-    if(message.content.includes('.com', '.net', '.tk')){
-        message.delete()
-    return message.reply(`**حبي ممنوع نشر اي روابط:joy: **`)
-    }
-});
-
-client.on('message', (message)=>{
-        if (message.content.startsWith(`+embed`)) {
-                var embed = new Discord.RichEmbed()
-                .setAuthor(client.user.username,client.user.avatarURL)
-                .setTitle("Message By " + message.author.tag)
-                .setDescription(message.content.split(" ").join(" ").slice(7))
-                .setColor("RANDOM")
-                .setThumbnail(message.author.avatarURL)
-                message.channel.send(embed);
-        } else if (message.content.startsWith(`+say`)) {
-                message.channel.send(message.content.split(" ").join(" ").slice(5));
-        };
-})
-
-
-client.on('message', message => {
-   let embed = new Discord.RichEmbed()
-
-    let args = message.content.split(' ').slice(1).join(' ');
-     if(!message.channel.guild) return;
-if(message.content.split(' ')[0] == '>bc') {
-         message.react("✔️")
-          let embed = new Discord.RichEmbed()
-    .setColor("#FF00FF")
-    .setThumbnail(message.author.avatarURL)   
-                                      .addField('تم الارسال بواسطة :', "<@" + message.author.id + ">")
-                 message.channel.sendEmbed(embed);
-        message.guild.members.forEach(m => {
-            var bc = new Discord.RichEmbed()
-.addField('**● Sender  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
-            .addField('***● Server  :***', `*** → ${message.guild.name}***`)               
-    .setColor('#ff0000')
-                 .addField('ّ', args)
-            m.send(``,{embed: bc});
-        });
-    }
-})
-	
-
-
-        client.on('message', message => {
-                        let args = message.content.split(" ").slice(1).join(" ")
-if(message.content.startsWith(prefix + 'color')) {
-    if(!args) return message.channel.send('`يرجي اختيار كم لون `');
-             if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**'); 
-             message.channel.send("**✅ | تم عمل الالوان**");
-                  setInterval(function(){})
-                    let count = 0;
-                    let ecount = 0;
-          for(let x = 1; x < `${parseInt(args)+1}`; x++){
-            message.guild.createRole({name:x,
-              color: 'RANDOM'})
-              }
-            }
-       });
-	   
-	   
-var Himo_04 = ["https://f.top4top.net/p_682it2tg6.png","https://e.top4top.net/p_682a1cus5.png","https://d.top4top.net/p_682pycol4.png","https://c.top4top.net/p_682vqehy3.png","https://b.top4top.net/p_682mlf9d2.png","https://a.top4top.net/p_6827dule1.png","https://b.top4top.net/p_682g1meb10.png","https://a.top4top.net/p_682jgp4v9.png","https://f.top4top.net/p_682d4joq8.png","https://e.top4top.net/p_6828o0e47.png","https://d.top4top.net/p_6824x7sy6.png","https://c.top4top.net/p_682gzo2l5.png","https://b.top4top.net/p_68295qg04.png","https://a.top4top.net/p_682zrz6h3.png","https://f.top4top.net/p_6828vkzc2.png","https://e.top4top.net/p_682i8tb11.png","https://f.top4top.net/p_8816hvic1.png","https://d.top4top.net/p_882020461.png","https://e.top4top.net/p_882s3ftn1.png","https://a.top4top.net/p_882eg9c51.png","https://c.top4top.net/p_882xkcqd1.png","https://f.top4top.net/p_882w7pdi1.png","https://a.top4top.net/p_882gcpmo1.png"]
-    client.on('message', message => {
-        var args = message.content.split(" ").slice(1);
-    if(message.content.startsWith(prefix + 'لو خيروك')) {
-         var cat = new Discord.RichEmbed()
-.setImage(Himo_04[Math.floor(Math.random() * Himo_04.length)])
-message.channel.sendEmbed(cat);
-    }
-});
-
-   client.on("message", msg => {
-           var prefix = ">";
-  if(msg.content.startsWith (prefix + "id")) {
-    if(!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
-      const embed = new Discord.RichEmbed();
-  embed.addField(":cloud_tornado:  الاسم", `**[ ${msg.author.username}#${msg.author.discriminator} ]**`, true)
-          .addField(":id:  الايدي", `**[ ${msg.author.id} ]**`, true)
-          .setColor("RANDOM")
-          .setFooter(msg.author.username , msg.author.avatarURL)
-          .setThumbnail(`${msg.author.avatarURL}`)
-          .setTimestamp()
-          .setURL(`${msg.author.avatarURL}`)
-          .addField(':spy:  الحالة', `**[ ${msg.author.presence.status.toUpperCase()} ]**`, true)
-          .addField(':satellite_orbital:   يلعب', `**[ ${msg.author.presence.game === null ? "No Game" : msg.author.presence.game.name} ]**`, true)
-          .addField(':military_medal:  الرتب', `**[ ${msg.member.roles.filter(r => r.name).size} ]**`, true)
-          .addField(':robot:  هل هو بوت', `**[ ${msg.author.bot.toString().toUpperCase()} ]**`, true);
-      msg.channel.send({embed: embed})
-  }
 });
 
 
 
 
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
 
-client.on('message', message => {
-
-    if (message.content.startsWith("رابط")) {        
-  message.channel.createInvite({
-        thing: true,
-        maxUses: 100,
-        maxAge: 86400
-    }).then(invite =>  
-      message.author.sendMessage(invite.url)
-    )
-    const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setDescription(" :white_check_mark: تم ارسال الرابط على الخاص ")
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("RANDOM")
-                .setAuthor(message.guild.name, message.guild.iconURL)
-        .setDescription(`
----------------------
- :kissing_closed_eyes:  - هذا الرابط صالح ل 100 مستخدم فقط
----------------------
- :smiley: - هذا الرابط صالح لمده 24 ساعه فقط
----------------------`)
-      message.author.sendEmbed(Embed11)
-    }
- 
-});
-
-
-      client.on('message', msg => { 
-        if (msg.content.startsWith(`>warn`)) {
-          if(!msg.member.hasPermission("MANAGE_MESSAGES")) return;
-           let args = msg.content.split(" ").slice(1);
-          if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
-          if (!args[1]) return msg.reply('اكتب السبب')
-          //غير اسم الروم او سوي روم بذا الاسم 
-          if (msg.guild.channels.find('name', 'warns')) {
-            //اذا غيرت فوق غير هنا كمان 
-            msg.guild.channels.find('name', 'warns').send(`
-          تم اعطائك تنبيه : ${msg.mentions.members.first()}
-          لأنك قمت بما يلي
-          ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
-          `)
-          }
+    if (!message.content.startsWith(prefix)) return;
+      let command = message.content.split(" ")[0];
+      command = command.slice(prefix.length);
+        if(command === "skin") {
+                const args = message.content.split(" ").slice(1).join(" ")
+        if (!args) return message.channel.send("** اكتب اسم سكنك . **");
+        const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
+    message.channel.send(image)
         }
-})
-
-client.on('message', message => {
-    if(message.content === 'brb'){
-        message.channel.send('take your time :heart:')
-    }
-});
-
-    client.on('message', message => {
-              if (!message.channel.guild) return;
-      if(message.content =='>members')
-      var IzRo = new Discord.RichEmbed()
-      .setThumbnail(message.author.avatarURL)
-      .setFooter(message.author.username, message.author.avatarURL)
-      .setTitle(':tulip:| Members info')
-      .addBlankField(true)
-      .addField('عدد اعضاء السيرفر',`${message.guild.memberCount}`)
-      message.channel.send(IzRo);
-
     });
 
- client.on('guildCreate', guild => {
-  client.channels.get("room id new ").send(`**تم اضافة البوت في سيرفر جديد مبروكك
-اسم السيرفر: __${guild.name}__
-اونر السيرفر: __${guild.owner}__**`)
-}); 
 
-client.on('message', message => {
-     var prefix = ">"
-if (message.content.startsWith(prefix + "uptime")) {
-    let uptime = client.uptime;
+client.on("message",function(message) { // Leaked by [ @M3a4x ]
+    if(message.content.startsWith(prefix + 'stats')) {
+        var uptime = client.uptime;
 
-    let days = 0;
-    let hours = 0;
-    let minutes = 0;
-    let seconds = 0;
-    let notCompleted = true;
+    var days = 0;
+    var hours = 0;
+    var minutes = 0;
+    var seconds = 0;
+    var notCompleted = true;
 
     while (notCompleted) {
 
@@ -573,64 +278,386 @@ if (message.content.startsWith(prefix + "uptime")) {
 
     }
 
-    message.channel.send("`" + `${days} days, ${hours} hrs, ${minutes} min , ${seconds} sec` + "`");
+var v1 = new Discord.RichEmbed()
+  v1.setTimestamp(new Date())
+  v1.setColor("#6a109d")
+  v1.setDescription('***__ انتظر .. جاري الحصول علي البيانات __***')
+  v1.setFooter("# | S TeaM |")
+var heroo = new Discord.RichEmbed()
+.setColor('#6a109d')
+.setTimestamp(new Date())
+.setThumbnail(client.user.avatarURL)
+.setTitle('King Bot Info')
+.setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+.setAuthor(client.user.username,client.user.avatarURL)
+.addField("**البرفكس** :",`**[ ${prefix} ]**`,true)
+.addField("**السيرفرات** :","**[ "+client.guilds.size+" ]**",true)
+.addField("**القنوات** :","**[ "+client.channels.size+" ]**",true)
+.addField("**المستخدمين** :","**[ "+client.users.size+" ]**",true)
+.addField("**اسم البوت** : ","**[ "+client.user.username+" ]**",true)
+.addField("**ايدي البوت **:","**[ "+client.user.id+" ]**",true)
+.addField("**الحجم المستخدم** :",`**[ ${(process.memoryUsage().rss / 1048576).toFixed()}MB ]**`,true)
+.addField("**موعد الاقلاع** :",`**[** **Days:** \`${days}\` **Hours:** \`${hours}\` **Minutes:** \`${minutes}\` **Seconds:** \`${seconds}\` **]**`,true)
+.setFooter("S TeaM  |");
+  message.channel.send({embed:v1}).then(m => {
+      setTimeout(() => {
+         m.edit({embed:heroo});
+      },3000);
+  });
+}
+});
+//انقليزي حلو
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
+var args = message.content.split(" ").slice(1).join(" ")
+if(message.content.startsWith(prefix + 'args')) {
+if(!args) return message.reply("please select a slice");
+message.channel.send(`let args = message.content.split(" ").slice(${args}).join(" ")`);
+}
+
+    if(message.content.startsWith(prefix + "server")) { // Leaked by [ @M3a4x ]
+    	var verificationLevels = ['1', '2', '3', '4', '5']
+        if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("Sorry, But you need `Manage Server` prermission for this");
+        const embed = new Discord.RichEmbed()
+        .setAuthor(message.guild.name, message.guild.iconURL)
+        .setColor("BLACK")
+        .addField(":id: **Server ID**:", message.guild.id, true)
+
+        .addField(":calendar: **Created On**", `${message.guild.createdAt.toLocaleString()} \n ${moment(message.guild.createdAt).fromNow()}`,true)
+
+        .addField(":crown: **Owned by**:", `${message.guild.owner.user.username}#${message.guild.owner.user.discriminator} [${message.guild.owner.user.id}]`, true)
+
+        .addField(`:speech_balloon: **Channels** [${message.guild.channels.size}]:`, ` Voice [${message.guild.channels.filter(m => m.type === 'voice').size}] | Text [${message.guild.channels.filter(m => m.type === 'text').size}] | Category [${message.guild.channels.filter(m => m.type == 'category').size}]`,true)
+
+        .addField(`:busts_in_silhouette: **Members** [${message.guild.memberCount}]: `, `Online [${message.guild.members.filter(m => m.presence.status != 'offline').size}] | Offline [${message.guild.members.filter(m => m.presence.status === 'offline').size}]`, true)
+
+        .addField(`:closed_lock_with_key: **Roles**: `, `[${message.guild.roles.size}]`, true)
+
+        .addField(`:earth_africa: **Others:** `, `**Region:** ${message.guild.region} \n **Verification Level:** ${verificationLevels[message.guild.verificationLevel]}`, true)
+
+        message.channel.send({embed:embed})
+    }
+})
 
 
+
+const ytdl = require("ytdl-core");
+const getYoutubeID = require('get-youtube-id');
+const fetchVideoInfo = require('youtube-info');
+const YouTube = require('simple-youtube-api');
+const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
+const queue = new Map();
+const request = require('request');
+
+
+/*
+البكجآت
+npm install discord.js
+npm install ytdl-core
+npm install get-youtube-id
+npm install youtube-info
+npm install simple-youtube-api
+npm install queue
+*/
+
+client.on('guildCreate', guild => { // Leaked by [ @Fr3on Gamer#9338 ]
+var message = "zg";
+         const embed = new Discord.RichEmbed()
+     .setColor("GOLD")
+     .setTitle('King Bot Link Click Here .!')
+     .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+  .setDescription(`**
+  New Server Add King Bot ✅
+اسم السيرفر: ${guild.name}
+صاحب السيرفر: ${guild.owner}**`);
+client.channels.get("465340887279468564").sendEmbed(embed)
+});
+
+client.on('guildDelete', guild => { // Leaked by [ @Fr3on Gamer#9338 ]
+var message = "zg";
+         const embed = new Discord.RichEmbed()
+     .setColor("GOLD")
+     .setTitle('King Bot Link Click Here .!')
+     .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+  .setDescription(`**
+  Server Kicked King Bot :cry:
+اسم السيرفر: ${guild.name}
+صاحب السيرفر: ${guild.owner}**`);
+client.channels.get("465340887279468564").sendEmbed(embed)
+});
+
+
+
+
+
+
+
+
+client.on('message', message => { // Leaked by [ Fr3on Gamer#9338 ]
+            if(!message.channel.guild) return;
+var args = message.content.split(' ').slice(1).join(' ');
+if (message.content.startsWith('-bcall')){
+ if (message.author.id !== '456641975932813345') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
+ if(!message.author.id === '456641975932813345') return;
+message.channel.sendMessage('جار ارسال الرسالة |✅')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
 }
 });
 
 
-	client.on('message', async message =>{
-  if (message.author.boss) return;
-	var prefix = ">";
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
 
+
+           if (message.content.startsWith(prefix + "user")) {
+                     if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات ❌`);
+
+                message.guild.fetchInvites().then(invs => {
+      let member = client.guilds.get(message.guild.id).members.get(message.author.id);
+      let personalInvites = invs.filter(i => i.inviter.id === message.author.id);
+      let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+      var moment = require('moment');
+      var args = message.content.split(" ").slice(1);
+let user = message.mentions.users.first();
+var men = message.mentions.users.first();
+ var heg;
+ if(men) {
+     heg = men
+ } else {
+     heg = message.author
+ }
+var mentionned = message.mentions.members.first();
+  var h;
+ if(mentionned) {
+     h = mentionned
+ } else {
+     h = message.member
+ }
+        moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+
+    .setColor("#0a0909")
+    .setAuthor(message.author.username)
+ .setThumbnail(message.author.avatarURL)
+.addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
+.addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+.addField(': عدد الدعوات', inviteCount,false)
+.setFooter("King Bot.")
+    message.channel.sendEmbed(id);
+})
+}
+
+
+
+     });
+
+
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if (message.author.bot) return;
+    if(message.content == '$mb') {
+    const embed = new Discord.RichEmbed()
+    .addField(`حالة الأعضاء 🔋`,'-',   true)
+.addField(`💚 اونلاين :   ${message.guild.members.filter(m=>m.presence.status == 'online').size}`,'-',   true)
+.addField(`❤ مشغول :     ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`,'-',   true)
+.addField(`💛 خامل :      ${message.guild.members.filter(m=>m.presence.status == 'idle').size}`,'-',   true)
+.addField(`🖤 اوفلاين :   ${message.guild.members.filter(m=>m.presence.status == 'offline').size}`,'-',  true)
+.addField(`💙   الكل :  ${message.guild.memberCount}`,'-',   true)
+         message.channel.send({embed});
+
+    }
+  });
+
+
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
+
+
+          if(!message.channel.guild) return;
+   if(message.author.bot) return;
+      if(message.content === prefix + "icon"){
+          const embed = new Discord.RichEmbed()
+
+      .setTitle(`This is  ** ${message.guild.name} **  Photo !`)
+  .setAuthor(message.author.username, message.guild.iconrURL)
+    .setColor(0x164fe3)
+    .setImage(message.guild.iconURL)
+    .setURL(message.guild.iconrURL)
+                    .setTimestamp()
+
+   message.channel.send({embed});
+      }
+  });
+
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+if(message.content === prefix + 'مصحف' || message.content === prefix + 'ms7f') {
+	var pages = ['http://quran.ksu.edu.sa/ayat/safahat1/1.png','http://quran.ksu.edu.sa/ayat/safahat1/2.png','http://quran.ksu.edu.sa/ayat/safahat1/3.png','http://quran.ksu.edu.sa/ayat/safahat1/4.png','http://quran.ksu.edu.sa/ayat/safahat1/5.png','http://quran.ksu.edu.sa/ayat/safahat1/6.png','http://quran.ksu.edu.sa/ayat/safahat1/7.png','http://quran.ksu.edu.sa/ayat/safahat1/8.png','http://quran.ksu.edu.sa/ayat/safahat1/9.png','http://quran.ksu.edu.sa/ayat/safahat1/10.png','http://quran.ksu.edu.sa/ayat/safahat1/11.png','http://quran.ksu.edu.sa/ayat/safahat1/12.png','http://quran.ksu.edu.sa/ayat/safahat1/13.png','http://quran.ksu.edu.sa/ayat/safahat1/14.png','http://quran.ksu.edu.sa/ayat/safahat1/15.png','http://quran.ksu.edu.sa/ayat/safahat1/16.png','http://quran.ksu.edu.sa/ayat/safahat1/17.png','http://quran.ksu.edu.sa/ayat/safahat1/18.png','http://quran.ksu.edu.sa/ayat/safahat1/19.png','http://quran.ksu.edu.sa/ayat/safahat1/20.png','http://quran.ksu.edu.sa/ayat/safahat1/21.png','http://quran.ksu.edu.sa/ayat/safahat1/22.png','http://quran.ksu.edu.sa/ayat/safahat1/23.png','http://quran.ksu.edu.sa/ayat/safahat1/24.png','http://quran.ksu.edu.sa/ayat/safahat1/25.png','http://quran.ksu.edu.sa/ayat/safahat1/26.png','http://quran.ksu.edu.sa/ayat/safahat1/27.png','http://quran.ksu.edu.sa/ayat/safahat1/28.png','http://quran.ksu.edu.sa/ayat/safahat1/29.png','http://quran.ksu.edu.sa/ayat/safahat1/30.png','http://quran.ksu.edu.sa/ayat/safahat1/31.png','http://quran.ksu.edu.sa/ayat/safahat1/32.png','http://quran.ksu.edu.sa/ayat/safahat1/33.png','http://quran.ksu.edu.sa/ayat/safahat1/34.png','http://quran.ksu.edu.sa/ayat/safahat1/35.png','http://quran.ksu.edu.sa/ayat/safahat1/36.png','http://quran.ksu.edu.sa/ayat/safahat1/37.png','http://quran.ksu.edu.sa/ayat/safahat1/38.png','http://quran.ksu.edu.sa/ayat/safahat1/39.png','http://quran.ksu.edu.sa/ayat/safahat1/40.png','http://quran.ksu.edu.sa/ayat/safahat1/41.png','http://quran.ksu.edu.sa/ayat/safahat1/42.png','http://quran.ksu.edu.sa/ayat/safahat1/43.png','http://quran.ksu.edu.sa/ayat/safahat1/44.png','http://quran.ksu.edu.sa/ayat/safahat1/45.png','http://quran.ksu.edu.sa/ayat/safahat1/46.png','http://quran.ksu.edu.sa/ayat/safahat1/47.png','http://quran.ksu.edu.sa/ayat/safahat1/48.png','http://quran.ksu.edu.sa/ayat/safahat1/49.png','http://quran.ksu.edu.sa/ayat/safahat1/50.png','http://quran.ksu.edu.sa/ayat/safahat1/51.png','http://quran.ksu.edu.sa/ayat/safahat1/52.png','http://quran.ksu.edu.sa/ayat/safahat1/53.png','http://quran.ksu.edu.sa/ayat/safahat1/55.png','http://quran.ksu.edu.sa/ayat/safahat1/56.png','http://quran.ksu.edu.sa/ayat/safahat1/57.png','http://quran.ksu.edu.sa/ayat/safahat1/58.png','http://quran.ksu.edu.sa/ayat/safahat1/59.png','http://quran.ksu.edu.sa/ayat/safahat1/60.png','http://quran.ksu.edu.sa/ayat/safahat1/60.png','http://quran.ksu.edu.sa/ayat/safahat1/61.png','http://quran.ksu.edu.sa/ayat/safahat1/62.png','http://quran.ksu.edu.sa/ayat/safahat1/63.png','http://quran.ksu.edu.sa/ayat/safahat1/64.png','http://quran.ksu.edu.sa/ayat/safahat1/65.png','http://quran.ksu.edu.sa/ayat/safahat1/66.png','http://quran.ksu.edu.sa/ayat/safahat1/67.png','http://quran.ksu.edu.sa/ayat/safahat1/68.png','http://quran.ksu.edu.sa/ayat/safahat1/69.png','http://quran.ksu.edu.sa/ayat/safahat1/70.png','http://quran.ksu.edu.sa/ayat/safahat1/71.png','http://quran.ksu.edu.sa/ayat/safahat1/72.png','http://quran.ksu.edu.sa/ayat/safahat1/73.png','http://quran.ksu.edu.sa/ayat/safahat1/74.png','http://quran.ksu.edu.sa/ayat/safahat1/75.png','http://quran.ksu.edu.sa/ayat/safahat1/76.png','http://quran.ksu.edu.sa/ayat/safahat1/77.png','http://quran.ksu.edu.sa/ayat/safahat1/78.png','http://quran.ksu.edu.sa/ayat/safahat1/79.png','http://quran.ksu.edu.sa/ayat/safahat1/80.png','http://quran.ksu.edu.sa/ayat/safahat1/81.png','http://quran.ksu.edu.sa/ayat/safahat1/82.png','http://quran.ksu.edu.sa/ayat/safahat1/83.png','http://quran.ksu.edu.sa/ayat/safahat1/84.png','http://quran.ksu.edu.sa/ayat/safahat1/85.png','http://quran.ksu.edu.sa/ayat/safahat1/86.png','http://quran.ksu.edu.sa/ayat/safahat1/87.png','http://quran.ksu.edu.sa/ayat/safahat1/88.png','http://quran.ksu.edu.sa/ayat/safahat1/89.png','http://quran.ksu.edu.sa/ayat/safahat1/90.png','http://quran.ksu.edu.sa/ayat/safahat1/91.png','http://quran.ksu.edu.sa/ayat/safahat1/92.png','http://quran.ksu.edu.sa/ayat/safahat1/93.png','http://quran.ksu.edu.sa/ayat/safahat1/94.png','http://quran.ksu.edu.sa/ayat/safahat1/95.png','http://quran.ksu.edu.sa/ayat/safahat1/96.png','http://quran.ksu.edu.sa/ayat/safahat1/97.png','http://quran.ksu.edu.sa/ayat/safahat1/98.png','http://quran.ksu.edu.sa/ayat/safahat1/99.png','http://quran.ksu.edu.sa/ayat/safahat1/100.png','http://quran.ksu.edu.sa/ayat/safahat1/101.png','http://quran.ksu.edu.sa/ayat/safahat1/102.png','http://quran.ksu.edu.sa/ayat/safahat1/103.png','http://quran.ksu.edu.sa/ayat/safahat1/104.png','http://quran.ksu.edu.sa/ayat/safahat1/105.png','http://quran.ksu.edu.sa/ayat/safahat1/106.png','http://quran.ksu.edu.sa/ayat/safahat1/107.png','http://quran.ksu.edu.sa/ayat/safahat1/108.png','http://quran.ksu.edu.sa/ayat/safahat1/109.png','http://quran.ksu.edu.sa/ayat/safahat1/110.png','http://quran.ksu.edu.sa/ayat/safahat1/111.png','http://quran.ksu.edu.sa/ayat/safahat1/112.png','http://quran.ksu.edu.sa/ayat/safahat1/113.png','http://quran.ksu.edu.sa/ayat/safahat1/114.png','http://quran.ksu.edu.sa/ayat/safahat1/115.png','http://quran.ksu.edu.sa/ayat/safahat1/116.png','http://quran.ksu.edu.sa/ayat/safahat1/117.png','http://quran.ksu.edu.sa/ayat/safahat1/118.png','http://quran.ksu.edu.sa/ayat/safahat1/119.png','http://quran.ksu.edu.sa/ayat/safahat1/120.png','http://quran.ksu.edu.sa/ayat/safahat1/121.png','http://quran.ksu.edu.sa/ayat/safahat1/122.png','http://quran.ksu.edu.sa/ayat/safahat1/123.png','http://quran.ksu.edu.sa/ayat/safahat1/124.png','http://quran.ksu.edu.sa/ayat/safahat1/125.png','http://quran.ksu.edu.sa/ayat/safahat1/126.png','http://quran.ksu.edu.sa/ayat/safahat1/127.png','http://quran.ksu.edu.sa/ayat/safahat1/128.png','http://quran.ksu.edu.sa/ayat/safahat1/129.png','http://quran.ksu.edu.sa/ayat/safahat1/130.png','http://quran.ksu.edu.sa/ayat/safahat1/131.png','http://quran.ksu.edu.sa/ayat/safahat1/132.png','http://quran.ksu.edu.sa/ayat/safahat1/133.png','http://quran.ksu.edu.sa/ayat/safahat1/134.png','http://quran.ksu.edu.sa/ayat/safahat1/135.png','http://quran.ksu.edu.sa/ayat/safahat1/136.png','http://quran.ksu.edu.sa/ayat/safahat1/137.png','http://quran.ksu.edu.sa/ayat/safahat1/138.png','http://quran.ksu.edu.sa/ayat/safahat1/139.png','http://quran.ksu.edu.sa/ayat/safahat1/140.png','http://quran.ksu.edu.sa/ayat/safahat1/141.png','http://quran.ksu.edu.sa/ayat/safahat1/142.png','http://quran.ksu.edu.sa/ayat/safahat1/143.png','http://quran.ksu.edu.sa/ayat/safahat1/144.png','http://quran.ksu.edu.sa/ayat/safahat1/145.png','http://quran.ksu.edu.sa/ayat/safahat1/146.png','http://quran.ksu.edu.sa/ayat/safahat1/147.png','http://quran.ksu.edu.sa/ayat/safahat1/148.png','http://quran.ksu.edu.sa/ayat/safahat1/149.png','http://quran.ksu.edu.sa/ayat/safahat1/150.png','http://quran.ksu.edu.sa/ayat/safahat1/151.png','http://quran.ksu.edu.sa/ayat/safahat1/152.png','http://quran.ksu.edu.sa/ayat/safahat1/153.png','http://quran.ksu.edu.sa/ayat/safahat1/154.png','http://quran.ksu.edu.sa/ayat/safahat1/155.png','http://quran.ksu.edu.sa/ayat/safahat1/156.png','http://quran.ksu.edu.sa/ayat/safahat1/157.png','http://quran.ksu.edu.sa/ayat/safahat1/158.png','http://quran.ksu.edu.sa/ayat/safahat1/159.png','http://quran.ksu.edu.sa/ayat/safahat1/160.png','http://quran.ksu.edu.sa/ayat/safahat1/161.png','http://quran.ksu.edu.sa/ayat/safahat1/162.png','http://quran.ksu.edu.sa/ayat/safahat1/163.png','http://quran.ksu.edu.sa/ayat/safahat1/164.png','http://quran.ksu.edu.sa/ayat/safahat1/165.png','http://quran.ksu.edu.sa/ayat/safahat1/166.png','http://quran.ksu.edu.sa/ayat/safahat1/167.png','http://quran.ksu.edu.sa/ayat/safahat1/168.png','http://quran.ksu.edu.sa/ayat/safahat1/169.png','http://quran.ksu.edu.sa/ayat/safahat1/170.png','http://quran.ksu.edu.sa/ayat/safahat1/171.png','http://quran.ksu.edu.sa/ayat/safahat1/172.png','http://quran.ksu.edu.sa/ayat/safahat1/173.png','http://quran.ksu.edu.sa/ayat/safahat1/174.png','http://quran.ksu.edu.sa/ayat/safahat1/175.png','http://quran.ksu.edu.sa/ayat/safahat1/176.png','http://quran.ksu.edu.sa/ayat/safahat1/177.png','http://quran.ksu.edu.sa/ayat/safahat1/178.png','http://quran.ksu.edu.sa/ayat/safahat1/179.png','http://quran.ksu.edu.sa/ayat/safahat1/180.png','http://quran.ksu.edu.sa/ayat/safahat1/181.png','http://quran.ksu.edu.sa/ayat/safahat1/182.png','http://quran.ksu.edu.sa/ayat/safahat1/183.png','http://quran.ksu.edu.sa/ayat/safahat1/184.png','http://quran.ksu.edu.sa/ayat/safahat1/185.png','http://quran.ksu.edu.sa/ayat/safahat1/186.png','http://quran.ksu.edu.sa/ayat/safahat1/187.png','http://quran.ksu.edu.sa/ayat/safahat1/188.png','http://quran.ksu.edu.sa/ayat/safahat1/189.png','http://quran.ksu.edu.sa/ayat/safahat1/190.png','http://quran.ksu.edu.sa/ayat/safahat1/191.png','http://quran.ksu.edu.sa/ayat/safahat1/192.png','http://quran.ksu.edu.sa/ayat/safahat1/193.png','http://quran.ksu.edu.sa/ayat/safahat1/194.png','http://quran.ksu.edu.sa/ayat/safahat1/195.png','http://quran.ksu.edu.sa/ayat/safahat1/196.png','http://quran.ksu.edu.sa/ayat/safahat1/197.png','http://quran.ksu.edu.sa/ayat/safahat1/198.png','http://quran.ksu.edu.sa/ayat/safahat1/199.png','http://quran.ksu.edu.sa/ayat/safahat1/200.png']
+	var page = 1;
+
+	message.delete();
+
+	var embed = new Discord.RichEmbed()
+	.setColor('#264d00')
+	.setFooter(`القراآن الكريم | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128')
+	.setImage(pages[page-1])
+
+// ${page}
+// ${pages.length}
+	message.channel.sendEmbed(embed).then(msg => {
+
+		msg.react('⏮').then( r => {
+			msg.react('⬅')
+		.then(() => msg.react('⏹'))
+		.then(() => msg.react('➡'))
+		.then(() => msg.react('⏭'))
+
+		var backwardsFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id === message.author.id;
+			var forwardsFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id === message.author.id;
+
+			var sbackwardsFilter = (reaction, user) => reaction.emoji.name === '⏮' && user.id === message.author.id;
+			var sforwardsFilter = (reaction, user) => reaction.emoji.name === '⏭' && user.id === message.author.id;
+
+			var cancelFilter = (reaction, user) => reaction.emoji.name === '⏹' && user.id === message.author.id;
+
+		var backwards = msg.createReactionCollector(backwardsFilter, { time: 0 });
+			var forwards = msg.createReactionCollector(forwardsFilter, { time: 0 });
+
+		var sbackwards = msg.createReactionCollector(sbackwardsFilter, { time: 0 });
+			var sforwards = msg.createReactionCollector(sforwardsFilter, { time: 0 });
+
+			var cancel = msg.createReactionCollector(cancelFilter, { time: 0 });
+
+			backwards.on('collect', r => {
+				if (page === 1) return;
+				page--;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`القراآن الكريم | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128');
+				msg.edit(embed)
+			})
+			forwards.on('collect', r => {
+				if (page === pages.length) return;
+				page++;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`القراآن الكريم | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128');
+				msg.edit(embed)
+			})
+			sbackwards.on('collect', r => {
+				if (page === 1) return;
+				page = 1;
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`القراآن الكريم | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128');
+				msg.edit(embed)
+			})
+			sforwards.on('collect', r => {
+				if (page === pages.length) return;
+				page = 200; // إذا تبي تكمل ل 600 صفحة غير الرقم للصفحة الي وصلت لها
+				embed.setImage(pages[page-1]);
+				embed.setFooter(`القراآن الكريم | صفحة رقم ${page} من اصل ${pages.length} صفحة`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128');
+				msg.edit(embed)
+			})
+			cancel.on('collect', r => {
+				embed.setDescription(`**سوف يتم إغلاق القائمة**`);
+				embed.setImage('');
+				embed.setFooter(`Menu will close after 3sec`, 'https://cdn.discordapp.com/avatars/439427357175185408/b484f58b385cd3da5799522c52111ad4.jpg?size=128');
+				msg.edit(embed).then(msg.delete(3000));
+			})
+		})
+	})
+}
+});
+
+
+
+
+
+
+
+
+
+client.on('message', function(message) { // Leaked by [ @Fr3on Gamer#9338 ]
+    if(message.content.startsWith(prefix + 'roll')) {
+       var args = message.content.split(" ").slice(1);
+        if (!args[0]) {
+            message.channel.send('**حط رقم معين يتم السحب منه**');
+            return;
+            }
+    message.channel.send(Math.floor(Math.random() * args.join(' ')));
+            if (!args[0]) {
+          message.edit('1')
+          return;
+        }
+    }
+});
+
+   client.on('message',function(message) { // Leaked by [ @Fr3on Gamer#9338 ]
+      if(message.content === prefix + "inv") {
+          if(!message.channel.guild) return;
+          var mmmmEmbed = new Discord.RichEmbed()
+          .setAuthor(client.user.username)
+          .setTitle('-  اضغط هنا !.')
+          .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot`)
+          .setThumbnail(client.user.avatarURL)
+          .setFooter(`- Requested By: ${message.author.tag}`,message.author.avatarURL);
+          message.channel.send(mmmmEmbed)
+      }
+   });
+
+client.on('message',  message =>{ // Leaked by [ @Fr3on Gamer#9338 ]
+var moruad = 60000;
+if (message.author.omar) return;
 if (!message.content.startsWith(prefix)) return;
-	let command = message.content.split(" ")[0];
-	 command = command.slice(prefix.length);
-	let args = message.content.split(" ").slice(1);
-	if (command == "mute") {
-		if (!message.channel.guild) return;
-		if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
-		if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
-		let user = message.mentions.users.first();
-		let muteRole = message.guild.roles.find("name", "Muted");
-		if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-		if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
-		let reason = message.content.split(" ").slice(2).join(" ");
-		message.guild.member(user).addRole(muteRole);
-		const muteembed = new Discord.RichEmbed()
-		.setColor("RANDOM")
-		.setAuthor(`Muted!`, user.displayAvatarURL)
-		.setThumbnail(user.displayAvatarURL)
-		.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-		.addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-		.addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
-		.addField("User", user, true)
-		message.channel.send({embed : muteembed});
-		var muteembeddm = new Discord.RichEmbed()
-		.setAuthor(`Muted!`, user.displayAvatarURL)
-		.setDescription(`      
-${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين
-${message.author.tag} تمت معاقبتك بواسطة
-[ ${reason} ] : السبب
-اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين
-`)
-		.setFooter(`في سيرفر : ${message.guild.name}`)
-		.setColor("RANDOM")
-	user.send( muteembeddm);
+if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
+var command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+var args = message.content.split(" ").slice(1);
+    if(command == "mute") {
+   var tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!tomute) return message.reply("**يجب عليك المنشن اولاّ**:x: ") .then(m => m.delete(5000));
+	if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**للأسف لا أمتلك صلاحية** `MANAGE_MASSAGEES`');
+    var muterole = message.guild.roles.find(`name`, "Muted");
+    //start of create role
+    if(!muterole){
+      try{
+        muterole =  message.guild.createRole({
+          name: "Muted",
+          color: "#070000",
+          permissions:[]
+        })
+        message.guild.channels.forEach((channel, id) => {
+          channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+    //end of create role
+  var mutetime = args[1];
+    if(!mutetime) return message.reply("**يرجى تحديد وقت الميوت**:x:");
+if(isNaN(mutetime)) return message.reply("** يرجي تحديد الوقت بـ الارقام فقط الارقام بلدقائق")
+   (tomute.addRole(muterole.id));
+message.reply(`<@${tomute.id}> **تم اعطائه ميوت ومدة الميوت** : ${mutetime}m`);
+setTimeout(function(){
+      tomute.removeRole(muterole.id);
+      message.channel.send(`<@${tomute.id}> **انقضى الوقت وتم فك الميوت عن الشخص**:white_check_mark: `);
+    }, mutetime*moruad);
+
+
+
   }
 if(command === `unmute`) {
   if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**ليس لديك صلاحية لفك عن الشخص ميوت**:x: ").then(m => m.delete(5000));
 if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
 
-  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+ var toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.channel.sendMessage("**عليك المنشن أولاّ**:x: ");
 
-  let role = message.guild.roles.find (r => r.name === "Muted");
-  
+  var role = message.guild.roles.find (r => r.name === "Muted");
+
   if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**لم يتم اعطاء هذه شخص ميوت من الأساس**:x:")
 
-  await toMute.removeRole(role)
+  toMute.removeRole(role)
   message.channel.sendMessage("**لقد تم فك الميوت عن شخص بنجاح**:white_check_mark:");
 
   return;
@@ -639,171 +666,530 @@ if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return mess
 
 });
 
-client.on('message', message => {
-	                  if(!message.channel.guild) return;
-    if(message.content.startsWith(prefix + 'bc')) {
-    if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-  if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
-    let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-    let copy = "PrinceBot";
-    let request = `Requested By ${message.author.username}`;
-    if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
-    msg.react('✅')
-    .then(() => msg.react('❌'))
-    .then(() =>msg.react('✅'))
-    
-    let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-    let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
-    
-    let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-    let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
- reaction1.on("collect", r => {
-    message.channel.send(`**☑ | Done ... The Broadcast Message Has Been Sent For __${message.guild.members.size}__ Members**`).then(m => m.delete(5000));
-    message.guild.members.forEach(m => {
-  
-  var bc = new
-       Discord.RichEmbed()
-       .setColor('RANDOM')
-       .setTitle('Broadcast')
-       .addField('سيرفر', message.guild.name)
-       .addField('المرسل', message.author.username)
-       .addField('الرسالة', args)
-       .setThumbnail(message.author.avatarURL)
-       .setFooter(copy, client.user.avatarURL);
-    m.send({ embed: bc })
-    msg.delete();
+
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+   if(message.content.startsWith(prefix + "invites")) {
+    message.guild.fetchInvites().then(invs => {
+      var user = message.mentions.users.first() || message.author
+      var personalInvites = invs.filter(i => i.inviter.id === user.id);
+      var inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+              var mmmmEmbed = new Discord.RichEmbed()
+                         .setAuthor(client.user.username)
+                         .setThumbnail(message.author.avatarURL)
+ .addField(` لقد قمت بدعوة :`, ` ${inviteCount} `)
+           .setFooter(`- Requested By: ${message.author.tag}`);
+           message.channel.send(mmmmEmbed)
+});
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+client.on('message', async message => { // Leaked by [ @Fr3on Gamer#9338 ]
+  if(message.content.startsWith(prefix + "tC")) {
+      if(message.author.bot) return;
+    if(!message.channel.guild) return;
+    await message.channel.send("ارسل اسم الروم").then(e => {
+    var filter = m => m.author.id === message.author.id
+    var  name = '';
+   var time = '';
+    var type = '';
+    var limit = '';
+
+    var types = ["text", "voice", "كتابي", "صوتي"];
+    var chaName = message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+    .then(collected => {
+      name = collected.first().content
+      collected.first().delete()
+
+
+
+e.edit("ارسل مدة الروم بالدقائق لااقل من 2 ولا اعلى من 180")
+var chaTime = message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+.then(co => {
+if(isNaN(co.first().content)) return message.reply("الوقت بالدقائق ! ارقام فقطٍ");
+if(co.first().content > 180 || co.first().content < 2) return message.channel.send("لا اقل من دقيقتان ولا اكثر من 180 دقيقه")
+  time = co.first().content
+co.first().delete()
+  e.edit("ارسل نوع الروم text, voice")
+var chaType = message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+.then(col => {
+  type = col.first().content
+col.first().delete()
+e.edit("ارسل عدد الاعضاء الذين يستطيعون الدخول")
+var chaLimit = message.channel.awaitMessages(filter, { max: 1, time: 20000, errors: ['time'] })
+.then(coll => {
+  if(isNaN(coll.first().content)) return message.reply("عدد الاعضاء يكون بالارقام فقط");
+    limit = coll.first().content
+coll.first().delete()
+
+  e.edit("جاري اعداد الغرفه الرجاء الانتضار...")
+  message.guild.createChannel(name, type).then(c => {
+    c.edit({
+      userLimit: limit
     })
+    setTimeout(() => {
+      c.delete()
+      message.channel.send("تم انقضاء الوقت الكامل لا اعده التجديد اسنخدم امر $tC")
+    }, Math.floor(time*60000))
+    var  chna = message.guild.channels.find("name", "log")
+    const embed = new Discord.RichEmbed()
+    chna.send({
+      embed: embed.setTitle("New TempChat") .setDescription(`Channel Type: ${type}`) .addField("Channel owner", message.author.username) .addField("Channel name", name) .addField("Channel timeout", time) .addField("Channel ID", c.id)
     })
-    reaction2.on("collect", r => {
-    message.channel.send(`**Broadcast Canceled.**`).then(m => m.delete(5000));
-    msg.delete();
-    })
-    })
-    }
-    });
-	
-	
-	client.on('message', function(msg) {
-if(msg.content.startsWith ('>what')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-      .addField(':globe_with_meridians:** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField(':medal:** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField(':red_circle:**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField(':large_blue_circle:**__ عدد الاعضاء الاونلاين__**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField(':pencil:**__ الرومات الكتابية__**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField(':microphone:**__ رومات الصوت__**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField(':crown:**__ الأونـر__**',`**${msg.guild.owner}**`,true)
-      .addField(':id:**__ ايدي السيرفر__**',`**${msg.guild.id}**`,true)
-      .addField(':date:**__ تم عمل السيرفر في__**',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed});
-    }
-  });
-
-client.on('message', message => {
-  if (message.author.x5bz) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "kick") {
-               if(!message.channel.guild) return message.reply('** This command only for servers**');
-         
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("**You Don't Have ` KICK_MEMBERS ` Permission**");
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("**I Don't Have ` KICK_MEMBERS ` Permission**");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
-  if (!message.guild.member(user)
-  .kickable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
-
-  message.guild.member(user).kick();
-
-  const kickembed = new Discord.RichEmbed()
-  .setAuthor(`KICKED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({
-    embed : kickembed
   })
+  e.edit("تم انشاء الغرفه استمتع")
+
+})
+})
+})
+})
+})
+
+  }
+})
+
+
+
+
+
+	client.on('message', async msg => { // Leaked by [ @Fr3on Gamer#9338 ]
+	var prefix = "$";
+	var user = msg.author;
+		if (msg.content === (prefix +'help')) {
+		if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+		msg.channel.send({embed: new Discord.RichEmbed()
+ .setAuthor(client.user.username , client.user.avatarURL)
+ .setThumbnail(msg.author.avatarURL)
+ .setTitle(`Welcome To ${msg.guild.name}`)
+           .setFooter(`- Requested By: ${msg.author.tag}`,msg.author.avatarURL)
+  .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+ .setDescription(`**اذا كنت تريد الاوامر العامة اظغط الريكشن** 🌏 \n**اذا كنت تريد الاوامر الادارية اظغط الريكشن**🔧 \n**اذا كنت تريد بعض الشرح عن البوت اضغط الريكشن**💥 \n**اذا كنت تريد الالغاء اظغط الريكشن **❌\n              **وشكرا لمستخدمين البوت**`)
+
+ .setTimestamp()
+}).then(zg => {
+     zg.react('🌏').then(r=>{
+     zg.react('🔧').then(r=>{
+     zg.react('💥').then(r=>{
+     zg.react('❌').then(r=>{
+ var aaa = (reaction, user) => reaction.emoji.name === '🌏' && user.id === msg.author.id;
+   var mmm = (reaction, user) => reaction.emoji.name === '🔧' && user.id === msg.author.id;
+    var vvv = (reaction, user) => reaction.emoji.name === '💥' && user.id === msg.author.id;
+    var ccc = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
+
+    var aa = zg.createReactionCollector(aaa, { maxMatches:1 , time: 60000 , });
+    var mm = zg.createReactionCollector(mmm, { maxMatches:1 , time: 60000 , });
+    var vv = zg.createReactionCollector(vvv, { maxMatches:1 , time: 60000 , });
+    var cc = zg.createReactionCollector(ccc, { maxMatches:1 , time: 60000 , });
+
+aa.on("collect", r => {
+	zg.edit({embed: new Discord.RichEmbed()
+ .setAuthor(client.user.username , client.user.avatarURL)
+ .setThumbnail(msg.author.avatarURL)
+ .setTitle(`Welcome To ${msg.guild.name}`)
+          .setFooter(`- Requested By: ${msg.author.tag}`,msg.author.avatarURL)
+  .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+.setDescription(`**:earth_americas:  General Commends**\n${prefix}**server - لعرض معلومات عن سيرفرك**\n${prefix}**roll - القرعة**\n${prefix}**ms7f - فتح المصحف**\n${prefix}**invites - لرؤية دعواتك**\n${prefix}**skin - رؤية سكنك بماين كرافت**\n$**avatar [user] - لعرض صورتك او صوره شخص**\n$**system-sar7 - لمعرفة نظام امر صراحة**\n$**tC - لانشاء رومات مؤقتة**\n$**user - معلومات عن حسابك**\n$**mb - معلومات عن الاعضاء**\n$**icon - لاظهار صورة سيرفرك**\n$**tr - لترجمة اي شي تقولة **\n$**cal - لتشغيل الألة الحاسبة**`)
+
+ .setTimestamp()
+	});
+
+
+	})//خراااااااااااااااااااااااااااااااااااااااااااااااااااااااااا
+mm.on("collect", r => {
+	zg.edit({embed: new Discord.RichEmbed()
+ .setAuthor(client.user.username , client.user.avatarURL)
+ .setThumbnail(msg.author.avatarURL)
+ .setTitle(`Welcome To ${msg.guild.name}`)
+           .setFooter(`- Requested By: ${msg.author.tag}`,msg.author.avatarURL)
+  .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+.setDescription(`** :wrench: Admins Commends** \n$**system-man3 - لمعرفة كيفيه تفعيل نظام منع التهكير لسيرفرك**\n${prefix}**mute - لعمل ميوت للعضو**\n${prefix}**unmute لفك الميوت عن  العضو**\n${prefix}**bc - الرساله الجماعيه**\n${prefix}**ban - أمر الباند**\n**$kick - أمر الكيك**\n${prefix}**cc [number] - لصنع رتب الوان باختيار عدد**\n${prefix}**dc - لحذف جميع رتب الالوان فقط**\n**$clear - لمسح الشات**\n$**role [mention] [rolename] - لاعطاء شخص رتبة**\n$**rerole [user] [rolename] - لازالة رتبة من شخص**\n$**move [user] - لنقل شخص من روم صوتي لرومك**\n$**move all - لنقل جميع المتواجدين بـ الرومات لرومك**\n$**mct - لقفل جميع الرومات الكتابية**\n$**umct - لفتح جميع الرومات الكتابية**\n$**mcv - لقفل جميع الرومات الصوتية**\n$**umcv - لفتح جميع الرومات الصوتية**`)
+
+.setTimestamp()
+	});
+
+	})
+vv.on("collect", r => {
+    zg.edit({embed: new Discord.RichEmbed ()
+.setAuthor(client.user.username , client.user.avatarURL)
+ .setThumbnail(msg.author.avatarURL)
+ .setTitle(`Welcome To ${msg.guild.name}`)
+           .setFooter(`- Requested By: ${msg.author.tag}`,msg.author.avatarURL)
+  .setURL('https://discordapp.com/api/oauth2/authorize?client_id=498254846819041287&permissions=8&scope=bot')
+.setDescription(`**' King Bot Discord.\n$help - لرؤية الأوامر :comet: \n$inv - لدعوة البوت :wine_glass: \n معلومات عن البوت :thinking: \n بوت ديسكورت متكامل :soccer: :microphone: :earth_americas: \nيوجد داخل البوت خاصية منع التهكير مجانا وبسهوله تامة :scream: \nصيانة دورية :stopwatch: :wrench: \n 24 ساعة :point_up:
+ \nاضافات يومية :link: \n الدعم الفني للمساعدةة : https://discord.gg/QfB8p2S  :rose:  \n وشكرا لكم :lizard: **`)
+
+
+ .setTimestamp()
+    });
+
+})
+cc.on("collect", r => {
+    zg.delete();
+	msg.delete();
+})
+	 }).then(msg => msg.delete(15000));
+	 })
+	 })
+	 })
+})
+	 }
+	 });
+
+//اشتغل
+
+
+client.on('message',   eyad =>{ // Leaked by [ @Fr3on Gamer#9338 ]
+
+    var  args = eyad.content.split(" ").slice(2).join(" ")
+    var men = eyad.mentions.users.first()|| client.users.get(eyad.content.split(' ')[1])
+    var  mas = eyad.author
+                              if(eyad.content.startsWith(prefix + 'sar7')) {
+                              if(eyad.channel.type === "dm"){
+if(!args) return  eyad.channel.send("`حط بعد الايدي الرساله وانا برسلها :)`");
+if(!men) return  eyad.channel.send("`حط ايدي الشخص \n او يقد يكون الشخص ليس موجود في سرفرات مشتركه بيني وبينة`");
+                      var currentTime = new Date(),
+            Year = currentTime.getFullYear(),
+            Month = currentTime.getMonth() + 1,
+            Day = currentTime.getDate();
+     var eyadandr3d = new Discord.RichEmbed()
+     .setAuthor(eyad.author.username , eyad.author.avatarURL)
+     .setThumbnail(men.avatarURL)
+     .setDescription(`هل انت موافق لارسال الرساله \n موافق = ✅ \nرفض = ❌ \n**محتوي الرسالة : ${args}**`)
+     .setTimestamp()
+     .setFooter('لديك 60 ثانية للاختيار')
+     eyad.channel.send(eyadandr3d).then(message => {
+ message.react('✅').then(r=>{
+ message.react('❌').then(r=>{
+    var kk = (reaction, user) => reaction.emoji.name === '✅' && user.id === eyad.author.id;
+    var nn = (reaction, user) => reaction.emoji.name === '❌' && user.id === eyad.author.id;
+    var kkk = message.createReactionCollector(kk, { time: 60000 });
+    var nnn = message.createReactionCollector(nn, { time: 60000 });
+kkk.on("collect", r => {
+          const embed = new Discord.RichEmbed()
+               .setThumbnail("https://cdn.discordapp.com/attachments/429056808561278979/450412294078332948/download.jpg")
+               .setColor("RANDOM")
+               .addField('**●[اهلا بك]** ', `<@${men.id}>` , true)
+               .addField('**●[لقد تمت مصارحتك]**' ,       ` __${args}__ ` , true)
+               .addField('**●[تاريخ المصارحة]**' , Day + "-" + Month + "-" + Year , true)
+          client.users.get(men.id).sendEmbed(embed)
+          eyad.reply(`لقد تم ارسال الصراحه للشخص \n <@${men.id}>`)
+message.delete()
+          eyad.delete();
+})
+nnn.on("collect", r => {
+message.delete()
+eyad.reply("`تم الغاء الصراحة`")
+eyad.delete();
+})
+})
+})
+})
+}
 }
 });
 
-client.on('message', message => {
-        if (message.content === ">inv") {
-            if(!message.channel.guild) return;
-        let embed = new Discord.RichEmbed()
-        .setAuthor(` ${message.author.username} `, message.author.avatarURL)      
-        .setTitle(`:small_orange_diamond: اضغط هنا `)
-        .setURL(`https://discordapp.com/oauth2/authorize?client_id=470322680172904460&permissions=8&scope=bot`)
-        .setThumbnail(" https://cdn.discordapp.com/avatars/377904849783750667/6c76e412f18c142dfd711d05fb363869.png?size=2048")        
-     message.channel.sendEmbed(embed);
-       }
-   });
 
+// شف دسكورد
+client.on('message', msg => { // Leaked by [ @Fr3on Gamer#9338 ]
+  if (msg.author.bot) return;
+  if (!msg.content.startsWith(prefix)) return;
+  var command = msg.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  var args = msg.content.split(" ").slice(1);
 
-client.on('message', message => {
-  if (message.author.x5bz) return;
+    if(command === "clear") {
+        const emoji = client.emojis.find("name", "wastebasket")
+   var textxt = args.slice(0).join("");
+    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if (textxt == "") {
+        msg.delete().then
+    msg.channel.send("***```ضع عدد الرسائل التي تريد مسحه```***").then(m => m.delete(3000));
+} else {
+    msg.delete().then
+    msg.delete().then
+    msg.channel.bulkDelete(textxt);
+        msg.channel.send("```php\nعدد الرسائل التي تم مسحها: " + textxt + "\n```").then(m => m.delete(3000));
+        }
+    }
+}
+});
+
+  client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+  if (message.author.codes) return;
   if (!message.content.startsWith(prefix)) return;
 
-  let command = message.content.split(" ")[0];
+  var command = message.content.split(" ")[0];
   command = command.slice(prefix.length);
 
-  let args = message.content.split(" ").slice(1);
+var args = message.content.split(" ").slice(1);
 
   if (command == "ban") {
                if(!message.channel.guild) return message.reply('** This command only for servers**');
-         
-  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**");
+
+  if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply("**انت لا تملك الصلاحيات المطلوبه**");
   if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
   let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-  /*let b5bzlog = client.channels.find("name", "5bz-log");
-  if(!b5bzlog) return message.reply("I've detected that this server doesn't have a 5bz-log text channel.");*/
+
   if (message.mentions.users.size < 1) return message.reply("**منشن شخص**");
-  if(!reason) return message.reply ("**اكتب سبب الطرد**");
   if (!message.guild.member(user)
-  .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+  .bannable) return message.reply("**يجب ان تكون رتبة البوت اعلي من رتبه الشخص المراد تبنيدة**");
+
 
   message.guild.member(user).ban(7, user);
 
-  const banembed = new Discord.RichEmbed()
-  .setAuthor(`BANNED!`, user.displayAvatarURL)
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-  .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-  .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  message.channel.send({
-    embed : banembed
-  })
+message.channel.send(`**✅ ${user.tag} banned from the server ! ✈ **  `)
+
 }
 });
 
 
+//روحو سطر 26 الحييين
 
-	client.on('message', message => {
-    if(message.content === "^info") {
-        const embed = new Discord.RichEmbed()
-        .setColor("#00FFFF")
-  .addField('**الذاكرة المستخدمة 💾**', `${(process.memoryUsage().rss / 1000000).toFixed()}MB`, true)
-         .addField('**سرعة الاتصال📡**' , `${Date.now() - message.createdTimestamp}` + ' ms')
-        .addField('**استخدام المعالج💿**', `${(process.cpuUsage().rss / 10000).toFixed()}%`, true)
-        .addField('**:globe_with_meridians: عدد السيرفرات**' , `${client.guilds.size}`, true)
-        .addField('**عدد المستخدمين 👥 **' , `${client.users.size}`, true)
-               message.channel.sendEmbed(embed);
-           }
+
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if (message.content === "$mct") {
+                        if(!message.channel.guild) return message.reply(' This command only for servers');
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(' ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: false
+           }).then(() => {
+               message.channel.send("تم قفل الرومات الكتابية :white_check_mark: ")
+               });
+             }
+if (message.content === "$umct") {
+    if(!message.channel.guild) return message.reply(' This command only for servers');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: true
+           }).then(() => {
+               message.channel.send("تم فتح الرومات الكتابية :white_check_mark:")
+           });
+             }
+
+
+
 });
 
-client.login('NDcwMzIyNjgwMTcyOTA0NDYw.DjUryA.0JHYWQ67N6lMSZguSCoutOxU29s')
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if(message.content.startsWith('$system-man3')) {
+      message.channel.send(`**الخطوات المطلوبة لتشغيل مانع التهكير\n1- رفع رتبه البوت تحت رتبة صاحب السيرفر مباشرا : http://prntscr.com/k5afdc \n2-اعطاء البوت صلاحية ADMINISTRATOR : http://prntscr.com/k5afpd \n وهكذا تم تفعيل مانع التهكير بنجاح وبلا اي مشاكل اذا واجهت اي مشكله توجه لسيرفر الدعم** :white_check_mark: `)
+    }
+  });
 
+client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+    if (message.content === "$mcv") {
+                        if(!message.channel.guild) return message.reply(' This command only for servers');
+if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(' ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+         CONNECT: false
+           }).then(() => {
+               message.channel.send("تم تقفيل الرومات الصوتية :white_check_mark: ")
+           });
+             }
+if (message.content === "$umcv") {
+    if(!message.channel.guild) return message.reply(' This command only for servers');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+          CONNECT: true
+           }).then(() => {
+               message.channel.send("تم فتح الرومات الصوتية :white_check_mark:")
+           });
+             }
+
+
+
+});
+
+
+
+
+
+
+ client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+        var  user = message.mentions.users.first() || message.author;
+    if (message.content.startsWith(prefix + "avatar")) {
+message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
+}
+});
+
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
+if (message.content === "$system-sar7") {
+message.channel.send(`**الامر :  $sar7\n خاصيه صارح\nالطريقه كـ التالي :\nتروح البوت خاص : http://prntscr.com/k4kpsb \n مثال : بصارح نفسي للتجربة : http://prntscr.com/k4kq59 \n وتضغط صح
+بيصير كذا :http://prntscr.com/k4kqna \n وبس كذا اشتغل الامر ميه ميه :thumbsup: ** `)
+}
+});
+
+var roles = {};
+
+
+
+
+client.on("message", message => { // Leaked by [ @Fr3on Gamer#9338 ]
+	var args = message.content.split(' ').slice(1);
+	var msg = message.content.toLowerCase();
+	if( !message.guild ) return;
+	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if( msg.toLowerCase().startsWith( prefix + 'rerole ;' ) ){
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase();
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first();
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().removeRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.removeRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
+		}
+	} else {
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase();
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first();
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().addRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.addRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
+		}
+	}
+});
+        client.on('message', async message => { // Leaked by [ @Fr3on Gamer#9338 ]
+			if(message.content.includes('discord.gg')){
+			    if(message.member.hasPermission("MANAGE_GUILD")) return;
+        if(!message.channel.guild) return;
+        message.delete()
+          var command = message.content.split(" ")[0];
+    let muterole = message.guild.roles.find(`name`, "Muted");
+    if(!muterole){
+      try{
+        muterole = await message.guild.createRole({
+          name: "Muted",
+          color: "#000000",
+          permissions:[]
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+          await channel.overwritePermissions(muterole, {
+            SEND_MESSAGES: false,
+            ADD_REACTIONS: false
+          });
+        });
+      }catch(e){
+        console.log(e.stack);
+      }
+    }
+           if(!message.channel.guild) return message.reply('** This command only for servers**');
+     message.member.addRole(muterole);
+    const embed500 = new Discord.RichEmbed()
+      .setTitle("Muted Ads")
+            .addField(`**  You Have Been Muted **` , `**Reason : Sharing Another Discord Link**`)
+            .setColor("c91616")
+            .setThumbnail(`${message.author.avatarURL}`)
+            .setAuthor(message.author.username, message.author.avatarURL)
+        .setFooter(`${message.guild.name} `)
+     message.channel.send(embed500)
+	 message.author.send('` انت معاقب ميوت شاتي بسبب نشر سرفرات ان كان عن طريق الخطا **ف** تكلم مع الادارة `');
+
+
+    }
+})
+	client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+	if(message.content.startsWith(prefix + 'move all')) {
+	 if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
+	   if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
+	if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
+	 var author = message.member.voiceChannelID;
+	 var m = message.guild.members.filter(m=>m.voiceChannel)
+	 message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
+	 m.setVoiceChannel(author)
+	 })
+	 message.channel.send(`**تم سحب جميع الأعضاء الي الروم الصوتي حقك.**`)
+
+
+	 }
+	   });
+
+
+
+    client.on('message', message => { // Leaked by [ @Fr3on Gamer#9338 ]
+if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'move')) {
+        if(!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send("⚠️|`انت لا تمتلك الخاصيه المطلوبة`");
+ if (message.member.hasPermission("MOVE_MEMBERS")) {
+ if (message.mentions.users.size === 0) {
+ return message.channel.send("``للأستخدام اكتب  : " +prefix+ "move [USER]``")
+}
+if (message.member.voiceChannel != null) {
+ if (message.mentions.members.first().voiceChannel != null) {
+ var authorchannel = message.member.voiceChannelID;
+ var usermentioned = message.mentions.members.first().id;
+var embed = new Discord.RichEmbed()
+ .setTitle("Succes!")
+ .setColor("#000000")
+ .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك✅ `)
+var embed = new Discord.RichEmbed()
+.setTitle(`You are Moved in ${message.guild.name}`)
+ .setColor("RANDOM")
+.setDescription(`**<@${message.author.id}> Moved You To His Channel!\nServer --> ${message.guild.name}**`)
+ message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
+message.guild.members.get(usermentioned).send(embed)
+} else {
+message.channel.send("`لا تستطيع سحب `"+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
+}
+} else {
+ message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
+}
+} else {
+message.react("❌")
+ }
+}
+});
+
+
+client.on("message", (message) => {
+    if (message.content.startsWith('$rem')) {
+        if (!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply("You Don't Have `MANAGE_CHANNELS` Premissions ");
+
+        let args = message.content.split(' ').slice(1);
+        let channel = message.client.channels.find('name', args.join(' '));
+        if (!channel) return message.reply('**There is no room like this name -_-**').catch(console.error);
+        channel.delete()
+    }
+});
 client.login(process.env.BOT_TOKEN);
