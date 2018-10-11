@@ -304,4 +304,12 @@ client.on('message', message => {
    message.delete()
   }
  });
+client.on('ebnklb',function(ebnklb) {
+    
+    if(ebnklb.content.startsWith("<@497701112116412416>")) {
+        ebnklb.channel.send('Hey Im **liduidity**  A Nice Bot Developed By:`.Boody`')
+        ebnklb.channel.send('My Prefix `-`')
+
+    }
+});
 client.login(process.env.BOT_TOKEN);
