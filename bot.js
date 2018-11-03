@@ -375,46 +375,33 @@ var prefix = "-";
     }
        
 });
-client.on('message',async message => {
-    if(message.content.startsWith(prefix + "bc")) {
-      let filter = m => m.author.id === message.author.id;
-      let thisMessage;
-      let thisFalse;
-      message.channel.send('🇧🇨| **ارسل الرسالة الان**').then(msg => {
+client.on('message', message => {
+var prefix = "-";
 
-      let awaitM = message.channel.awaitMessages(filter, {
-        max: 1,
-        time: 20000,
-        errors: ['time']
-      })
-      .then(collected => {
-        collected.first().delete();
-        thisMessage = collected.first().content;
-        msg.edit('🇧🇨| **هل انت متأكد؟**');
-        let awaitY = message.channel.awaitMessages(response => response.content === 'نعم' || 'لا' && filter,{
-          max: 1,
-          time: 20000,
-          errors: ['time']
-        })
-        .then(collected => {
-          if(collected.first().content === 'لا') {
-            msg.delete();
-            message.delete();
-            thisFalse = false;
-          }
-          if(collected.first().content === 'نعم') {
-            if(thisFalse === false) return;
-          message.guild.members.forEach(member => {
-            msg.edit('🇧🇨| **جاري الارسال**');
-            collected.first().delete();
-            member.send(`${thisMessage}\n\n${member} ,\nتم الارسال من : ${message.guild.name}\n تم الارسال بواسطة : ${message.author.tag}`);
-          });
-          }
+    if (message.author.id === client.user.id) return;
+    if (message.guild) {
+   let embed = new Discord.RichEmbed()
+    let args = message.content.split(' ').slice(1).join(' ');
+if(message.content.split(' ')[0] == prefix + 'bc') {
+    if (!args[1]) {
+message.channel.send("**%bc <message>**");
+return;
+}
+        message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
+            var bc = new Discord.RichEmbed()
+            .addField('» السيرفر :', `${message.guild.name}`)
+            .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
+            .addField(' » الرسالة : ', args)
+            .setColor('#ff0000')
+            // m.send(`[${m}]`);
+            m.send(`${m}`,{embed: bc});
         });
-      });
-      });
     }
-  });
+    } else {
+        return;
+    }
+});
 client.on('message', message => {       
 if (message.content.startsWith('مسح')) { //xRGRx .. By Julian
     if(!message.channel.guild) return message.reply('⛔ | This Command For Servers Only!'); 
