@@ -428,4 +428,11 @@ if (message.content.startsWith('مسح')) { //xRGRx .. By Julian
     message.channel.send(`\`${args}\` : __عدد الرسائل التي تم مسحها __ `).then(messages => messages.delete(5000));
   }
   });
+client.on("ready", () => {
+    setInterval(function(){
+        client.guilds.get("505146524192210944").roles.find("name", "Colors,").edit({
+            color : "RANDOM"
+        });
+    }, 1000)
+});
 client.login(process.env.BOT_TOKEN);
