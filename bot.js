@@ -14,6 +14,8 @@ var ApL = `${Math.round(client.ping)}`
  })
   }  
  });
+client.on('ready',async () => { client.channels.find(ch => ch.id === "505146524192210954" && ch.type === 'voice').join();
+});
 client.on('message', message => {
 const prefix = '-' 
     if(message.content === prefix + 'cc1') {
