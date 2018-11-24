@@ -790,4 +790,21 @@ reaction2.on("collect", r => {
 })
 }
 });
+client.on('guildMemberAdd', msg => { 
+    var embed = new Discord.RichEmbed()
+    .setAuthor(msg.user.username, msg.user.avatarURL)
+    .setThumbnail(msg.user.avatarURL)
+    .setImage('https://cdn.pg.sa/6h9cbPecjw.png')     
+    .setTitle('New Member!')
+    .setDescription('Welcome To server')
+    .addField('**ID Member:',"" +  msg.user.id, true)
+    .addField('**Tag Member**', msg.user.discriminator, true)
+    .addField('**Member Created At', msg.user.createdAt, true)
+    .addField(' 👤   You Number',`**[ ${msg.guild.memberCount} ]**`,true)
+    .setColor('GREEN')
+    .setFooter(msg.guild.name, msg.guild.iconURL, true)
+    var channel = msg.guild.channels.find('name', 'chat')         
+    if (!channel) return;
+    channel.send({embed : embed});
+    });
 client.login(process.env.BOT_TOKEN);
