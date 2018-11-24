@@ -803,7 +803,7 @@ client.on('guildMemberAdd', msg => {
     .addField(' 👤   You Number',`**[ ${msg.guild.memberCount} ]**`,true)
     .setColor('GREEN')
     .setFooter(msg.guild.name, msg.guild.iconURL, true)
-    var channel = msg.guild.channels.find('name', 'chat')         
+    var channel = msg.guild.channels.find('name', 'words')         
     if (!channel) return;
     channel.send({embed : embed});
     });
