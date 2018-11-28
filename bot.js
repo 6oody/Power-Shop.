@@ -292,65 +292,6 @@ const prefix = '-'
       msg.channel.send({file : "https://cdn.pg.sa/1c4R2LijPA.png"})
     }
   });
-client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "say") {
-   message.channel.sendMessage(args.join("  "))
-   message.delete()
-  }
- });
-client.on('ebnklb',function(ebnklb) {
-    
-    if(ebnklb.content.startsWith("<@497701112116412416>")) {
-        ebnklb.channel.send('Hey Im **liduidity**  A Nice Bot Developed By:`.Boody`')
-        ebnklb.channel.send('My Prefix `-`')
-
-    }
-});
-client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'welcome');
-    let memberavatar = member.user.avatarURL
-      if (!channel) return;
-    let embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
-        .setThumbnail(memberavatar)
-        .addField('🎽 | name :  ',`${member}`)
-        .addField('📢 | اطلق من دخل' , `Welcome to the server, ${member}`)
-        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
-                .addField('➡| انت العضو رقم',`${member.guild.memberCount}`)
-               
-                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
-                     
-                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
-                                       
-     .setFooter(`${member.guild.name}`)
-        .setTimestamp()
-   
-      channel.sendEmbed(embed);
-    });
-    
-    client.on('guildMemberRemove', member => {
-        var embed = new Discord.RichEmbed()
-        .setAuthor(member.user.username, member.user.avatarURL)
-        .setThumbnail(member.user.avatarURL)
-        .setTitle(`Why,,**SAD** :raised_hand::skin-tone-1: :pensive:`)
-        .setDescription(`Bye... :raised_hand::skin-tone-1: :pensive: `)
-        .addField('👤   تبقي',`**[ ${member.guild.memberCount} ]**`,true)
-        .setColor('RED')
-        .setFooter(`====.Welcome To Liduidity Shop,,====`, 'https://cdn.discordapp.com/attachments/397818254439219217/399292026782351381/shy.png')
-    
-    var channel =member.guild.channels.find('name', 'welcome')
-    if (!channel) return;
-    channel.send({embed : embed});
-     client.on('message', message => {
-      });
 var prefix = "-";
        if(message.content === prefix + "قفل") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -468,7 +409,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     }
 });
 client.on('guildMemberAdd', member => {
-  var logChannel = member.guild.channels.find(c => c.name === 'log');
+  var logChannel = member.guild.channels.find(c => c.name === 'seen');
   if(!logChannel) return;
  
   let newMember = new Discord.RichEmbed()
@@ -488,7 +429,7 @@ function Days(date) {
     return days + (days == 1 ? " day" : " days") + " ago";
 }
 client.on('guildMemberRemove', member => {
-  var logChannel = member.guild.channels.find(c => c.name === 'log');
+  var logChannel = member.guild.channels.find(c => c.name === 'seen');
   if(!logChannel) return;
  
   let leaveMember = new Discord.RichEmbed()
@@ -509,7 +450,7 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
     if(!voiceOld.guild.member(client.user).hasPermission('EMBED_LINKS')) return;
     if(!voiceOld.guild.member(client.user).hasPermission('VIEW_AUDIT_LOG')) return;
  
-    var logChannel = voiceOld.guild.channels.find(c => c.name === 'log');
+    var logChannel = voiceOld.guild.channels.find(c => c.name === 'seen');
     if(!logChannel) return;
  
     voiceOld.guild.fetchAuditLogs().then(logs => {
@@ -790,21 +731,92 @@ reaction2.on("collect", r => {
 })
 }
 });
-client.on('guildMemberAdd', msg => { 
-    var embed = new Discord.RichEmbed()
-    .setAuthor(msg.user.username, msg.user.avatarURL)
-    .setThumbnail(msg.user.avatarURL)
-    .setImage('https://cdn.pg.sa/6h9cbPecjw.png')     
-    .setTitle('New Member!')
-    .setDescription('Welcome To server')
-    .addField('**ID Member:',"" +  msg.user.id, true)
-    .addField('**Tag Member**', msg.user.discriminator, true)
-    .addField('**Member Created At', msg.user.createdAt, true)
-    .addField(' 👤   You Number',`**[ ${msg.guild.memberCount} ]**`,true)
-    .setColor('GREEN')
-    .setFooter(msg.guild.name, msg.guild.iconURL, true)
-    var channel = msg.guild.channels.find('name', 'words')         
-    if (!channel) return;
-    channel.send({embed : embed});
+const moment = require('moment');
+client.on('message',async message => {
+  var time = moment().format('Do MMMM YYYY , hh:mm');
+  var room;
+  var title;
+  var duration;
+  var gMembers;
+  var currentTime = new Date(),
+hours = currentTime.getHours() + 3 ,
+minutes = currentTime.getMinutes(),
+done = currentTime.getMinutes() + duration / 60000 ,
+seconds = currentTime.getSeconds();
+if (minutes < 10) {
+minutes = "0" + minutes;
+}
+var suffix = "AM";
+if (hours >= 12) {
+suffix = "PM";
+hours = hours - 12;
+}
+if (hours == 0) {
+hours = 12;
+}
+
+  var filter = m => m.author.id === message.author.id;
+  if(message.content.startsWith(prefix + "giveaway")) {
+
+    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
+    message.channel.send(`:eight_pointed_black_star:| **Send Name channel For the Giveaway**`).then(msg => {
+      message.channel.awaitMessages(filter, {
+        max: 1,
+        time: 20000,
+        errors: ['time']
+      }).then(collected => {
+        let room = message.guild.channels.find('name' , collected.first().content);
+        if(!room) return message.channel.send(':heavy_multiplication_x:| **i Found It :(**');
+        room = collected.first().content;
+        collected.first().delete();
+        msg.edit(':eight_pointed_black_star:| **Time For The Giveaway**').then(msg => {
+          message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+          }).then(collected => {
+            if(isNaN(collected.first().content)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+            duration = collected.first().content * 60000;
+            collected.first().delete();
+            msg.edit(':eight_pointed_black_star:| **Now send The Present **').then(msg => {
+              message.channel.awaitMessages(filter, {
+                max: 1,
+                time: 20000,
+                errors: ['time']
+              }).then(collected => {
+                title = collected.first().content;
+                collected.first().delete();
+                msg.delete();
+                message.delete();
+                try {
+                  let giveEmbed = new Discord.RichEmbed()
+                  .setDescription(`**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration / 60000} **Minutes**\n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`)
+                  .setFooter(message.author.username, message.author.avatarURL);
+                  message.guild.channels.find("name" , room).send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
+                     let re = m.react('🎉');
+                     setTimeout(() => {
+                       let users = m.reactions.get("🎉").users;
+                       let list = users.array().filter(u => u.id !== m.author.id !== client.user.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('Giveaway Ended !🎉',`Winners : ${gFilter} \nEnded at :`)
+                       .setTimestamp()
+					 m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
+					message.guild.channels.find("name" , room).send(`**Congratulations ${gFilter}! You won The \`${title}\`**` , {embed: {}})
+                     },duration);
+                   });
+                } catch(e) {
+                message.channel.send(`:heavy_multiplication_x:| **i Don't Have Prem**`);
+                  console.log(e);
+                }
+              });
+            });
+          });
+        });
+      });
     });
+  }
+});
 client.login(process.env.BOT_TOKEN);
