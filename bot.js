@@ -331,7 +331,7 @@ if (message.content.startsWith('مسح')) { //xRGRx .. By Julian
   });
 client.on("ready", () => {
     setInterval(function(){
-        client.guilds.get("505146524192210944").roles.find("name", "Colors,").edit({
+        client.guilds.get("505146524192210944").roles.find("name", "Colors,").edit({ //Ranibow Code 
             color : "RANDOM"
         });
     }, 1000)
@@ -542,85 +542,6 @@ client.on('voiceStateUpdate', (voiceOld, voiceNew) => {
         logChannel.send(voiceLeave);
     }
 });
-  
-  client.on("ready", () => {
-
-    var guild;
-
-    while (!guild)
-
-        guild = client.guilds.get("505146524192210944");
-
-    guild.fetchInvites().then((data) => {
-
-        data.forEach((Invite, key, map) => {
-
-            var Inv = Invite.code;
-
-            dat[Inv] = Invite.uses;
-
-        });
-
-    });
-
-});
-
- 
-
- 
-
- 
-
-client.on("guildMemberAdd", (member) => {
-
-    let channel = member.guild.channels.get("505785907803324426");
-
-    if (!channel) {
-
-        console.log("!the channel id it's not correct");
-
-        return;
-
-    }
-
-    if (member.id == client.user.id) {
-
-        return;
-
-    }
-
-    console.log('-');
-
-    var guild;
-
-    while (!guild)
-
-        guild = client.guilds.get("505146524192210944");
-
-    guild.fetchInvites().then((data) => {
-
-        data.forEach((Invite, key, map) => {
-
-            var Inv = Invite.code;
-
-            if (dat[Inv])
-
-                if (dat[Inv] < Invite.uses) {
-
- channel.send(`تم دعوته بواسطة  ${Invite.inviter} `) ;       
-
- }
-
-            dat[Inv] = Invite.uses;
-
-       
-
-       });
-
-    });
-
-});
-  
   client.on('message', async message => {
             if(message.content.includes('discord.gg')){ 
                 if(message.member.hasPermission("MANAGE_GUILD")) return;
@@ -681,8 +602,7 @@ client.on('guildMemberAdd', member => {
     const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
     const inviter = client.users.get(invite.inviter.id);
     const logChannel = member.guild.channels.find(channel => channel.name === "words");
-    logChannel.send(`**Name**: ${member} 
-****By**: <@${inviter.id}>`);
+    logChannel.send(`**Name**: ${member}    **By**: <@${inviter.id}>`);
   });
 });
 client.on('voiceStateUpdate', (old, now) => {
